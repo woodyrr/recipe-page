@@ -14,17 +14,18 @@ console.log(foodlist)
 
 </script>
 <template>
-    <section class="grid grid-cols-2  gap-3 ">
+    <section class="grid grid-cols-2 lg:grid-cols-1  gap-4 ">
         <div v-for="item in foodlist" class="relative">
-            <div class=" bg-transparent bg-[#0E1325] border border-[#394150] flex gap-3 rounded-lg duration-300 hover:bg-[#FEBD2E] text-[#E5E7EB] hover:text-black overflow-hidden">
-                <!-- <div> -->
-                    <img :src="item.strCategoryThumb" alt="" srcset="" class="catimg w-[30%] h-full ml-[-40px]  lg:ml-[-60px] rounded-l-full ">
-                <!-- </div> -->
-                
-                <!-- absolute left-[-30px] -->
-                <div class="flex justify-center items-center text[14px]">{{ item.strCategory }}</div>
+            <div class=" bg-transparent bg-[#0E1325] border border-[#394150] flex gap-3 rounded-xl duration-300 hover:bg-[#FEBD2E] text-[#E5E7EB] hover:text-black hover:font-bold overflow-hidden">
+                    <img :src="item.strCategoryThumb" alt="" srcset="" class="catimg w-[38%] sm:w-[32%] lg:w-[42%] h-full lg:ml-[-40px] sm:ml-[-40px] ml-[-20px] itemimg  rounded-l-full ">
+                <div class="flex justify-center items-center text-[14px]">{{ item.strCategory }}</div>
             </div>
         </div>
     </section>
     
 </template>
+<style>
+.itemimg{
+    image-rendering: -webkit-optimize-contrast;
+}
+</style>
