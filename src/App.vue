@@ -2,7 +2,7 @@
 import {ref} from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import mainhead from './components/header.vue'
-import base from './components/baserecipes.vue'
+// import base from './components/baserecipes.vue'
 import categories from './components/categories.vue'
 
 </script>
