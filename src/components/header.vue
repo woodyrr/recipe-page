@@ -5,10 +5,10 @@
 </script>
 <template>
     <!-- <main class=" "> -->
-      <div class="pt-[12px] w-full ">
-        <div class="maintop relative">
-            <img src="../assets/hero-imagehc.jpg" alt="" srcset="" class="w-full sm:h-[330px] rounded-lg  mainimg sm:hidden md:block md:h-full">
-            <img src="../assets/hero-text.svg" alt="" srcset=""  class="absolute top-4 right-24 sm:top-8  sm:right-16 w-[35%] sm:w-[45%] md:w-[35%]  md:top-[8%]  md:right-[15%] ">
+      <div class="sm:pt-[12px] w-full ">
+        <div class="maintop relative ">
+            <img src="../assets/hero-imagehc.jpg" alt="" srcset="" class="w-full h-[190px] sm:h-[330px] sm:rounded-lg  mainimg sm:hidden md:block md:h-full">
+            <img src="../assets/hero-text.svg" alt="" srcset=""  class="absolute top-6 right-20 sm:top-8  sm:right-16 w-[35%] sm:w-[45%] md:w-[35%]  md:top-[8%]  md:right-[15%] ">
         </div>
       </div>
     <!-- </main> -->
