@@ -26,7 +26,7 @@ onBeforeMount(() => {
                 {{route.params.id }} meals
             </div>
             <section class="grid lg:grid-cols-2 xl:grid-cols-3 gap-8 text-[16px] text-[#E5E7EB] font-medium">
-                <div v-for="item in food.meals">
+                <div v-for="item in food.meals.slice(0,20)">
                     <router-link :to="/meals/ + item.idMeal"  class=" bg-[#394150] p-3 w-full rounded-xl flex flex-col hover:text-black hover:font-bold duration-300 hover:bg-[#FEBD2E]  ">
                         <img :src="item.strMealThumb" alt="meal-thumbnail" srcset="" class="  rounded-xl pb-2 w-full h-[200px] sm:w-[800px]" id="your-img">
                         <div>{{ item.strMeal }}</div>
