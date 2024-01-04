@@ -3,13 +3,28 @@ import {ref, onBeforeMount} from 'vue'
 import { useRoute } from 'vue-router';
 const food = ref({});
 const route = useRoute();
+// onBeforeMount(() => {
+//     fetch(`https:www.themealdb.com/api/json/v1/1/filter.php?a=${route.params.id}`)
+//     .then(response => response.json())
+//     .then(data => {
+//         food.value = data;
+//     })
+// })
 onBeforeMount(() => {
-    fetch(`https:www.themealdb.com/api/json/v1/1/filter.php?a=${route.params.id}`)
-    .then(response => response.json())
-    .then(data => {
-        food.value = data;
+  fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${route.params.id}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
     })
-})
+    .then(data => {
+      food.value = data;
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
+});
 </script>
 
 <template>

@@ -7,16 +7,32 @@ const route = useRoute();
 // let base = "www.themealdb.com/api/json/v1/1/filter.php?c=Seafood"
 let base = "www.themealdb.com/api/json/v1/1/list.php?c=list"
 // www.themealdb.com/api/json/v1/1/filter.php?c=${route.params.id}
-onBeforeMount(() => {
-    fetch(`https:www.themealdb.com/api/json/v1/1/filter.php?c=${route.params.id}`)
-    .then(response => response.json())
-    .then(data => {
-        // console.log(data)
-        food.value = data.meals.slice(0,20);
+// onBeforeMount(() => {
+//     fetch(`https:www.themealdb.com/api/json/v1/1/filter.php?c=${route.params.id}`)
+//     .then(response => response.json())
+//     .then(data => {
+//         // console.log(data)
+//         food.value = data.meals.slice(0,20);
         
+//     })
+//     // console.log("Before Mount")
+// })
+
+onBeforeMount(() => {
+  fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${route.params.id}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
     })
-    // console.log("Before Mount")
-})
+    .then(data => {
+      food.value = data.meals.slice(0, 20);
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
+});
 </script>
 
 <template>
