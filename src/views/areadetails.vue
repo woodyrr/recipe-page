@@ -11,7 +11,7 @@ const route = useRoute();
 //     })
 // })
 onBeforeMount(() => {
-  fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${route.params.id}`)
+  fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${route.params.id}`)
     .then(response => {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -19,7 +19,7 @@ onBeforeMount(() => {
       return response.json();
     })
     .then(data => {
-      food.value = data;
+      food.value = data.meals.slice(0,20);
     })
     .catch(error => {
       console.error('Error fetching data:', error);
@@ -41,7 +41,7 @@ onBeforeMount(() => {
                 {{route.params.id }} meals
             </div>
             <section class="grid lg:grid-cols-2 xl:grid-cols-3 gap-8 text-[16px] text-[#E5E7EB] font-medium">
-                <div v-for="item in food.meals.slice(0,20)">
+                <div v-for="item in food">
                     <router-link :to="/meals/ + item.idMeal"  class=" bg-[#394150] p-3 w-full rounded-xl flex flex-col hover:text-black hover:font-bold duration-300 hover:bg-[#FEBD2E]  ">
                         <img :src="item.strMealThumb" alt="meal-thumbnail" srcset="" class="  rounded-xl pb-2 w-full h-[200px] sm:w-[800px]" id="your-img">
                         <div>{{ item.strMeal }}</div>

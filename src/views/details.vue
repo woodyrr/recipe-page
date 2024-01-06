@@ -1,20 +1,15 @@
 <script setup>
-import {ref, onBeforeMount} from 'vue'
+import {ref, onBeforeMount, computed} from 'vue'
 import { useRoute } from 'vue-router';
-// let mainid = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i='
 const food = ref({});
 const route = useRoute();
+onBeforeMount(async () => {
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${route.params.id}`);
+    const data = await response.json();
+    food.value = data;
+    
+});
 
-onBeforeMount(() => {
-    fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${route.params.id}`)
-    .then(response => response.json())
-    .then(data => {
-        // console.log(data)
-        food.value = data;
-        
-    })
-    // console.log("Before Mount")
-})
 </script>
 
 <template>
@@ -42,6 +37,7 @@ onBeforeMount(() => {
                         </router-link>
                     </div>
                 </div>
+
                 <!-- ingredients -->
                 <div class="ingredients flex flex-col gap-5 px-2 md:px-0">
                     <div class="flex gap-4">
@@ -49,90 +45,87 @@ onBeforeMount(() => {
                         <h3 class="font-bold flex items-center text-[18px]">Ingredients</h3>
                     </div>
                     <ul class="list-disc px-[5%] flex flex-col gap-2 text-[18px]">
-                            <li v-if="item.strMeasure1 != ''">
-                                {{ item.strMeasure1 }}
-                                {{ item.strIngredient1 }}
-                            </li> 
-                            <li v-if="item.strMeasure2 != ''">
-                                {{ item.strMeasure2 }}
-                                {{ item.strIngredient2 }}
-                            </li>
-                            <li v-if="item.strMeasure3 != ''">
-                                {{ item.strMeasure3 }}
-                                {{ item.strIngredient3 }}
-                            </li>
-                            <li v-if="item.strMeasure4 != ''">
-                                {{ item.strMeasure4 }}
-                                {{ item.strIngredient4 }}
-                            </li>
-                            <li v-if="item.strMeasure5 != ''">
-                                {{ item.strMeasure5 }}
-                                {{ item.strIngredient5 }}
-                            </li>
-                            <li v-if="item.strMeasure6 != ''">
-                                {{ item.strMeasure6 }}
-                                {{ item.strIngredient6 }}
-                            </li>
-                            <li  v-if="item.strMeasure7 != ''">
-                                {{ item.strMeasure7 }}
-                                {{ item.strIngredient7 }}
-                            </li>
-                            <li  v-if="item.strMeasure8 != ''">
-                                {{ item.strMeasure8 }}
-                                {{ item.strIngredient8 }}
-                            </li>
-                            <li  v-if="item.strMeasure9!= ''">
-                                {{ item.strMeasure9 }}
-                                {{ item.strIngredient9 }}
-                            </li>
-                            <li v-if="item.strMeasure10 != ''">
-                                {{ item.strMeasure10 }}
-                                {{ item.strIngredient10 }}
-                            </li>
-                            <li  v-if="item.strMeasure11 != ''">
-                                {{ item.strMeasure11 }}
-                                {{ item.strIngredient11 }}
-                            </li>
-                            <li v-if="item.strMeasure12 != ''">
-                                {{ item.strMeasure12 }}
-                                {{ item.strIngredient12 }}
-                            </li>
-                            <li v-if="item.strMeasure13 != ''">
-                                {{ item.strMeasure13 }}
-                                {{ item.strIngredient13 }}
-                            </li>
-                            <li v-if="item.strMeasure14 != ''">
-                                {{ item.strMeasure14 }}
-                                {{ item.strIngredient14 }}
-                            </li>
-                            <li  v-if="item.strMeasure15 != ''">
-                                {{ item.strMeasure15 }}
-                                {{ item.strIngredient15 }}
-                            </li>
-                            <li v-if="item.strMeasure16 != ''">
-                                {{ item.strMeasure16 }}
-                                {{ item.strIngredient16 }}
-                            </li>
-                            <li  v-if="item.strMeasure17 != ''">
-                                {{ item.strMeasure17 }}
-                                {{ item.strIngredient17 }}
-                            </li>
-                            <li v-if="item.strMeasure18 != ''">
-                                {{ item.strMeasure18 }}
-                                {{ item.strIngredient18 }}
-                            </li>
-                            <li v-if="item.strMeasure19 != ''">
-                                {{ item.strMeasure19 }}
-                                {{ item.strIngredient19 }}
-                            </li>
-                            <li v-if="item.strMeasure20 != ''">
-                                {{ item.strMeasure20 }}
-                                {{ item.strIngredient20 }}
-                            </li>
-                            <!-- // find a way to remove duplacates -->
-                            
+                        <li v-if="item.strIngredient1.length > 1 && item.strMeasure1 !== null">
+                            {{ item.strMeasure1 }}
+                            {{ item.strIngredient1 }}
+                        </li> 
+                        <li v-if="item.strIngredient2.length > 1">
+                            {{ item.strMeasure2 }}
+                            {{ item.strIngredient2 }}
+                        </li>
+                        <li v-if="item.strIngredient3.length > 1">
+                            {{ item.strMeasure3 }}
+                            {{ item.strIngredient3 }}
+                        </li>
+                        <li v-if="item.strIngredient4.length > 1">
+                            {{ item.strMeasure4 }}
+                            {{ item.strIngredient4 }}
+                        </li>
+                        <li v-if="item.strIngredient5.length > 1">
+                            {{ item.strMeasure5 }}
+                            {{ item.strIngredient5 }}
+                        </li>
+                        <li v-if="item.strIngredient6.length > 1">
+                            {{ item.strMeasure6 }}
+                            {{ item.strIngredient6 }}
+                        </li>
+                        <li  v-if="item.strIngredient7.length > 1">
+                            {{ item.strMeasure7 }}
+                            {{ item.strIngredient7 }}
+                        </li>
+                        <li  v-if="item.strIngredient8.length > 1">
+                            {{ item.strMeasure8 }}
+                            {{ item.strIngredient8 }}
+                        </li>
+                        <li  v-if="item.strIngredient9.length > 1">
+                            {{ item.strMeasure9 }}
+                            {{ item.strIngredient9 }}
+                        </li>
+                        <li v-if="item.strIngredient10.length > 1">
+                            {{ item.strMeasure10 }}
+                            {{ item.strIngredient10 }}
+                        </li>
+                        <li  v-if="item.strIngredient11.length > 1">
+                            {{ item.strMeasure11 }}
+                            {{ item.strIngredient11 }}
+                        </li>
+                        <li v-if="item.strIngredient12.length > 1">
+                            {{ item.strMeasure12 }}
+                            {{ item.strIngredient12 }}
+                        </li>
+                        <li v-if="item.strIngredient13.length > 1">
+                            {{ item.strMeasure13 }}
+                            {{ item.strIngredient13 }}
+                        </li>
+                        <li v-if="item.strIngredient14.length > 1">
+                            {{ item.strMeasure14 }}
+                            {{ item.strIngredient14 }}
+                        </li>
+                        <li  v-if="item.strIngredient15.length > 1">
+                            {{ item.strMeasure15 }}
+                            {{ item.strIngredient15 }}
+                        </li>
+                        <li v-if="item.strMeasure16 !== null  && item.strIngredient16.length > 1">
+                            {{ item.strMeasure16 }}
+                            {{ item.strIngredient16 }}
+                        </li>
+                        <li  v-if="item.strMeasure17 !== null  && item.strIngredient17.length > 1">
+                            {{ item.strMeasure17 }}
+                            {{ item.strIngredient17 }}
+                        </li>
+                        <li v-if="item.strMeasure18 !== null  && item.strIngredient18.length > 1">
+                            {{ item.strMeasure18 }}
+                            {{ item.strIngredient18 }}
+                        </li>
+                        <li v-if="item.strMeasure19 !== null  && item.strIngredient19.length > 1">
+                            {{ item.strMeasure19 }}
+                            {{ item.strIngredient19 }}
+                        </li>
+                        <li v-if="item.strMeasure20 !== null  && item.strIngredient20.length > 1">
+                            {{ item.strMeasure20 }}
+                            {{ item.strIngredient20 }}
+                        </li>
                     </ul>
-                
                 </div>
 
                 <div class="Instructions flex flex-col gap-5 px-2 md:px-0 pb-14">
